@@ -10,14 +10,16 @@ def connect_gsheet(sheet_name):
     scope = ["https://spreadsheets.google.com/feeds",
              "https://www.googleapis.com/auth/drive"]
 
-    # Load credentials (downloaded JSON from Google Cloud Service Account)
-    creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+    # Load credentials from Streamlit secrets.toml
+    creds_dict = st.secrets["google_service_account"]
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(dict(creds_dict), scope)
     client = gspread.authorize(creds)
 
     sheet = client.open(sheet_name).worksheet("Holdings")
     data = sheet.get_all_records()
     df = pd.DataFrame(data)
     return sheet, df
+
 
 # -----------------------
 # Streamlit UI
@@ -27,14 +29,22 @@ st.sidebar.success("Select Any page")
 st.title("📊 Portfolio Holdings Manager")
 
 # Connect to Google Sheet
-SHEET_NAME = "PortfolioTracker"   # 🔹 Replace with your Google Sheet name
+SHEET_NAME = "PortfolioTracker"   # Replace with your Google Sheet name
 sheet, df = connect_gsheet(SHEET_NAME)
 
 # Show Current Holdings
 st.subheader("Current Holdings")
-st.dataframe(df)
+if not df.empty:
+    df_display = df.copy()
+    df_display.index = df_display.index + 2  # Match Google Sheet row numbers (header = 1)
+    st.dataframe(df_display)
+else:
+    st.info("No holdings found.")
 
 
+# -----------------------
+# Add Holding Section
+# -----------------------
 with st.expander("➕ Add New Holding"):
     with st.form("add_holding"):
         col1, col2, col3 = st.columns(3)
@@ -62,20 +72,23 @@ with st.expander("➕ Add New Holding"):
             sheet.append_row(new_row)
             st.success("✅ Holding added successfully!")
             st.rerun()
-            
 
+
+# -----------------------
+# Delete Holding Section (By Row Index)
+# -----------------------
 with st.expander("🗑 Remove Holding"):
     st.write("Select a **row number** to delete that record permanently.")
     
     if not df.empty:
-        # Create mapping between display index (Google Sheets row number) and record
         df_display = df.copy()
-        df_display.index = df_display.index + 2  # Row numbers in Google Sheet
+        df_display.index = df_display.index + 2  # Google Sheet row numbers
         row_numbers = df_display.index.tolist()
 
         selected_row = st.selectbox("Select Row to Delete", row_numbers)
 
-        st.dataframe(df_display.loc[[selected_row]])  # Show selected record for confirmation
+        # Preview the row before deletion
+        st.dataframe(df_display.loc[[selected_row]])
 
         if st.button("Delete Selected Row"):
             try:
