@@ -2,10 +2,21 @@ import streamlit as st
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
+import google.generativeai as genai
+import requests
 
 # -----------------------
 # Google Sheets Connection
 # -----------------------
+
+genai.configure(api_key=st.secrets["genai"]["api_key"])
+
+model = genai.GenerativeModel("gemini-2.5-pro")
+
+def get_gemini_response(question):
+    response =  model.generate_content(question)
+    return response.text.strip()
+
 def connect_gsheet(sheet_name):
     scope = ["https://spreadsheets.google.com/feeds",
              "https://www.googleapis.com/auth/drive"]
@@ -19,6 +30,30 @@ def connect_gsheet(sheet_name):
     data = sheet.get_all_records()
     df = pd.DataFrame(data)
     return sheet, df
+
+def clear_input():
+    st.session_state["asset_id"] = ""
+    st.session_state["asset_type"] = "Stock"
+    st.session_state["asset_name"] = ""
+    st.session_state["buy_date"] = None
+    st.session_state["buy_price"] = 0.0
+    st.session_state["units"] = 0.0
+    st.session_state["current_price"] = 0.0
+    st.session_state["currency"] = "INR"
+    st.session_state["notes"] = ""
+
+def get_usd_to_inr():
+    url = "https://api.exchangerate-api.com/v4/latest/USD"
+    response = requests.get(url)
+    data = response.json()
+    return data['rates']['INR']
+
+def total_invest(df):
+    if df.empty:
+        return 0.0
+    sum = (df['Current Price'] * df['Units']).sum()
+    return get_usd_to_inr()*sum
+
 
 
 # -----------------------
@@ -37,6 +72,7 @@ st.subheader("Current Holdings")
 if not df.empty:
     df_display = df.copy()
     df_display.index = df_display.index + 2  # Match Google Sheet row numbers (header = 1)
+    st.metric(label="💰 Total Investment (INR)", value=total_invest(df))
     st.dataframe(df_display)
 else:
     st.info("No holdings found.")
