@@ -51,8 +51,25 @@ def get_usd_to_inr():
 def total_invest(df):
     if df.empty:
         return 0.0
-    sum = (df['Current Price'] * df['Units']).sum()
-    return get_usd_to_inr()*sum
+
+    total_sum = 0.0
+    usd_to_inr = get_usd_to_inr()
+
+    for _, row in df.iterrows():
+        if str(row["Asset_ID"]).strip() == "1":
+            value = row["Current Price"] * row["Units"]
+            total_sum += value * usd_to_inr  # Convert USD to INR
+            print("US Stocks ", total_sum)
+        elif str(row["Asset_ID"]).strip() == "3":
+            value = row["Current Price"] * row["Units"]
+            total_sum += value
+            print("INd ", total_sum)
+        else:
+            total_sum += row["Current Price"]  # Already INR
+            print("Other ", total_sum)
+
+    return round(total_sum, 2)
+
 
 
 
@@ -69,13 +86,27 @@ sheet, df = connect_gsheet(SHEET_NAME)
 
 # Show Current Holdings
 st.subheader("Current Holdings")
+
 if not df.empty:
     df_display = df.copy()
     df_display.index = df_display.index + 2  # Match Google Sheet row numbers (header = 1)
     st.metric(label="💰 Total Investment (INR)", value=total_invest(df))
-    st.dataframe(df_display)
+
+    # Define color logic
+    def highlight_profit_loss(row):
+        if row["Current Price"] > row["Buy_Price"]:
+            return ['background-color: #008000'] * len(row)  # light green
+        elif row["Current Price"] < row["Buy_Price"]:
+            return ['background-color: #FF0000'] * len(row)  # light red
+        else:
+            return ['background-color: black'] * len(row)
+
+    styled_df = df_display.style.apply(highlight_profit_loss, axis=1)
+
+    st.dataframe(styled_df, use_container_width=True)
 else:
     st.info("No holdings found.")
+
 
 
 # -----------------------
