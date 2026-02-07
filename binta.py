@@ -26,7 +26,7 @@ if not st.session_state.logged_in:
             flex-direction:column;
             justify-content:center;
             align-items:center;
-            height:90vh;
+            height:70vh;
             text-align:center;
         }
         </style>
@@ -34,8 +34,8 @@ if not st.session_state.logged_in:
 
     st.markdown("""
         <div class="login-box">
-            <h1>💌 Welcome</h1>
-            <p>Enter the secret password</p>
+            <h1>💌 Welcome My Love...</h1>
+            <p>Hint :- Something I never get tired of saying</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -130,6 +130,7 @@ else:
 
     /* Love Question */
     .love-box {
+        margin-top:30px;
         margin:30px auto;
         width:90%;
         background:rgba(255,255,255,0.35);
@@ -184,7 +185,7 @@ else:
                 </div>
                 <div class="back">
                     ✨ Teri aankhein batati hain, tujhe mujh se mohabbat hai<br>
-                    💞 Par dil ki tasalli ke liye, izhaar ho jaaye<br><br>
+                    💞 Par dil ki tasalli ke liye, izhaar ho jaaye<br><br><br><br>
 
                     🌙 So just a small reminder…<br><br>
 
