@@ -35,7 +35,8 @@ if not st.session_state.logged_in:
     st.markdown("""
         <div class="login-box">
             <h1>💌 Welcome My Love...</h1>
-            <p>Hint 🧩 Something I never get tired of saying</p>
+            <p><b>Hint 🧩</b><br>
+            Something I never get tired of saying ❤️</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -59,29 +60,23 @@ else:
         margin:0;
         font-family:'Poppins', sans-serif;
         background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
-        display:flex;
-        flex-direction:column;
-        align-items:center;
+        overflow-x:hidden;
     }
 
-    /* Scrolling Love Text */
+    /* Scrolling I LOVE YOU */
     .marquee {
         width:100%;
         overflow:hidden;
         white-space:nowrap;
-        box-sizing:border-box;
-        margin-top:20px;
+        color:white;
+        font-size:1.2rem;
+        margin-top:10px;
     }
-
     .marquee span {
         display:inline-block;
         padding-left:100%;
-        font-size:1.3rem;
-        color:white;
-        animation: scroll 12s linear infinite;
-        font-weight:600;
+        animation: scroll 10s linear infinite;
     }
-
     @keyframes scroll {
         0% { transform: translateX(0); }
         100% { transform: translateX(-100%); }
@@ -95,12 +90,12 @@ else:
     }
 
     .container {
-        width:100%;
         max-width:420px;
-        padding-bottom:200px;
+        margin:auto;
+        padding-bottom:180px;
     }
 
-    /* Single Card */
+    /* Card */
     .card {
         width:90%;
         height:260px;
@@ -111,9 +106,9 @@ else:
     .card-inner {
         width:100%;
         height:100%;
-        position:relative;
         transition:transform 0.6s;
         transform-style:preserve-3d;
+        position:relative;
         border-radius:25px;
         box-shadow:0 12px 30px rgba(0,0,0,0.25);
     }
@@ -140,7 +135,6 @@ else:
     .front {
         background: linear-gradient(135deg, #89f7fe, #66a6ff);
         color:white;
-        font-size:1.1rem;
         font-weight:600;
     }
 
@@ -153,33 +147,28 @@ else:
 
     /* Love Question */
     .love-box {
-        margin-top:80px; /* moved lower */
+        margin-top:80px;
         width:90%;
+        margin-left:auto;
+        margin-right:auto;
         background:rgba(255,255,255,0.35);
         padding:25px;
         border-radius:25px;
         text-align:center;
-        position:relative;
-    }
-
-    .love-box h2 {
-        color:white;
-        margin-bottom:30px;
-        font-size:1.2rem;
     }
 
     .btn-container {
         display:flex;
         justify-content:center;
         gap:50px;
-        position:relative;
+        margin-top:20px;
     }
 
     .btn {
-        padding:12px 26px;
-        font-size:1rem;
+        padding:12px 28px;
         border:none;
         border-radius:20px;
+        font-size:1rem;
         cursor:pointer;
     }
 
@@ -190,44 +179,86 @@ else:
 
     .no {
         background:white;
-        color:#333;
         position:relative;
+    }
+
+    /* Popup */
+    .popup {
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.5);
+        display:none;
+        justify-content:center;
+        align-items:center;
+        z-index:999;
+    }
+
+    .popup-box {
+        background:white;
+        padding:30px;
+        border-radius:25px;
+        text-align:center;
+        animation:pop 0.4s ease;
+    }
+
+    @keyframes pop {
+        from {transform:scale(0.6); opacity:0;}
+        to {transform:scale(1); opacity:1;}
+    }
+
+    .popup-box button {
+        margin-top:20px;
+        padding:10px 25px;
+        border:none;
+        border-radius:20px;
+        background:#ff4b5c;
+        color:white;
+        font-size:1rem;
+        cursor:pointer;
+    }
+
+    /* Confetti */
+    .confetti {
+        position:fixed;
+        width:10px;
+        height:10px;
+        top:0;
+        animation:fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+        to {
+            transform:translateY(100vh) rotate(360deg);
+            opacity:0;
+        }
     }
     </style>
 
-    <!-- Scrolling Love -->
     <div class="marquee">
-        <span>❤️ I love you ❤️ I love you ❤️ I love you ❤️ I love you ❤️</span>
+        <span>❤️ I LOVE YOU ❤️ I LOVE YOU ❤️ I LOVE YOU ❤️</span>
     </div>
 
     <h1>I love You Binta (Queen) 💖</h1>
 
     <div class="container">
 
-        <!-- Single Card -->
         <div class="card" onclick="this.classList.toggle('flipped')">
             <div class="card-inner">
-                <div class="front">
-                    💌 Tap to Read
-                </div>
+                <div class="front">💌 Tap to Read</div>
                 <div class="back">
                     ✨ Teri aankhein batati hain, tujhe mujh se mohabbat hai<br>
                     💞 Par dil ki tasalli ke liye, izhaar ho jaaye<br><br>
-
-                    Abhi toh bol do… 💖<br><br>
-
-                    🌙 So just a small reminder…<br><br>
-
-                    💫 We’ve already done the hardest part —<br>
-                    finding each other among the millions of people<br><br>
-
-                    🌷 Now let’s do the easiest thing…<br>
+                    Abhi tohh bol doo…<br><br>
+                    🌙 We’ve already done the hardest part —<br>
+                    finding each other among millions<br><br>
                     ❤️ Never lose each other.
                 </div>
             </div>
         </div>
 
-        <!-- Question -->
         <div class="love-box">
             <h2>Do you love me? 💖</h2>
             <div class="btn-container">
@@ -235,25 +266,43 @@ else:
                 <button class="btn no" id="noBtn">No</button>
             </div>
         </div>
+    </div>
 
+    <div id="popup" class="popup">
+        <div class="popup-box">
+            <h2>💍 Congratulations!</h2>
+            <p>Now you are booked for lifetime ❤️</p>
+            <button onclick="closePopup()">OK 💖</button>
+        </div>
     </div>
 
     <script>
     function yesClicked(){
-        alert("💍 Now you are booked for lifetime ❤️\\nCongratulations 🎉");
+        document.getElementById("popup").style.display="flex";
+        for(let i=0;i<80;i++){
+            const c=document.createElement("div");
+            c.className="confetti";
+            c.style.left=Math.random()*100+"vw";
+            c.style.backgroundColor=["#ff4b5c","#ffd700","#6a5acd","#00c9a7"][Math.floor(Math.random()*4)];
+            c.style.animationDuration=(Math.random()*2+2)+"s";
+            document.body.appendChild(c);
+            setTimeout(()=>c.remove(),3000);
+        }
     }
 
-    const noBtn = document.getElementById("noBtn");
+    function closePopup(){
+        document.getElementById("popup").style.display="none";
+    }
 
+    const noBtn=document.getElementById("noBtn");
     function moveNo(){
-        const x = Math.random() * 300 - 150;
-        const y = Math.random() * 200 - 100;
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        const x=Math.random()*400-200;
+        const y=Math.random()*250-120;
+        noBtn.style.transform=`translate(${x}px,${y}px)`;
     }
-
-    noBtn.addEventListener("touchstart", moveNo);
-    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("mouseover",moveNo);
+    noBtn.addEventListener("touchstart",moveNo);
     </script>
     """
 
-    components.html(html_code, height=1500)
+    components.html(html_code, height=1400)
