@@ -79,7 +79,7 @@ else:
 
     /* Single Card */
     .card {
-        width:70%;
+        width:90%;
         height:260px;
         margin:20px auto;
         perspective:1000px;
