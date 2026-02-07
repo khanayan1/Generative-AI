@@ -57,7 +57,7 @@ else:
     <style>
     body {
         margin:0;
-        font-family: 'Poppins', sans-serif;
+        font-family:'Poppins', sans-serif;
         background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
         display:flex;
         flex-direction:column;
@@ -74,13 +74,14 @@ else:
     .container {
         width:100%;
         max-width:420px;
-        padding-bottom:120px;
+        padding-bottom:140px;
     }
 
+    /* Single Card */
     .card {
         width:90%;
-        height:190px;
-        margin:15px auto;
+        height:260px;
+        margin:20px auto;
         perspective:1000px;
     }
 
@@ -91,7 +92,7 @@ else:
         transition:transform 0.6s;
         transform-style:preserve-3d;
         border-radius:25px;
-        box-shadow:0 10px 25px rgba(0,0,0,0.25);
+        box-shadow:0 12px 30px rgba(0,0,0,0.25);
     }
 
     .card.flipped .card-inner {
@@ -108,14 +109,15 @@ else:
         justify-content:center;
         align-items:center;
         text-align:center;
-        padding:20px;
-        font-size:1rem;
+        padding:25px;
         flex-direction:column;
+        line-height:1.6;
     }
 
     .front {
         background: linear-gradient(135deg, #89f7fe, #66a6ff);
         color:white;
+        font-size:1.1rem;
         font-weight:600;
     }
 
@@ -123,7 +125,7 @@ else:
         background: linear-gradient(135deg, #ff9a9e, #fecfef);
         color:#333;
         transform:rotateY(180deg);
-        line-height:1.6;
+        font-size:0.95rem;
     }
 
     /* Love Question */
@@ -139,88 +141,84 @@ else:
 
     .love-box h2 {
         color:white;
-        margin-bottom:20px;
+        margin-bottom:25px;
         font-size:1.2rem;
     }
 
+    .btn-container {
+        display:flex;
+        justify-content:center;
+        gap:40px;
+        position:relative;
+    }
+
     .btn {
-        padding:12px 22px;
+        padding:12px 24px;
         font-size:1rem;
         border:none;
-        border-radius:18px;
+        border-radius:20px;
         cursor:pointer;
-        margin:10px;
     }
 
     .yes {
         background:#ff4b5c;
         color:white;
-        width:120px;
     }
 
     .no {
         background:white;
         color:#333;
-        position:absolute;
-        left:50%;
-        transform:translateX(-50%);
-        width:100px;
+        position:relative;
     }
     </style>
 
-    <h1>Things I Feel When I Think of You 🌷</h1>
+    <h1>Just One Thing I Want to Say 💖</h1>
 
     <div class="container">
 
+        <!-- Single Card -->
         <div class="card" onclick="this.classList.toggle('flipped')">
             <div class="card-inner">
-                <div class="front">💬 What is Love?</div>
-                <div class="back">💞 Door hoke bhi dil saath rehta hai ❤️</div>
+                <div class="front">
+                    💌 Tap to Read
+                </div>
+                <div class="back">
+                    ✨ Teri aankhein batati hain, tujhe mujh se mohabbat hai<br>
+                    💞 Par dil ki tasalli ke liye, izhaar ho jaaye<br><br>
+
+                    🌙 So just a small reminder…<br><br>
+
+                    💫 We’ve already done the hardest part —<br>
+                    finding each other among the millions of people<br><br>
+
+                    🌷 Now let’s do the easiest thing…<br>
+                    ❤️ Never lose each other.
+                </div>
             </div>
         </div>
 
-        <div class="card" onclick="this.classList.toggle('flipped')">
-            <div class="card-inner">
-                <div class="front">🌙 What You Mean to Me</div>
-                <div class="back">💖 Tum meri zindagi ka sabse khoobsurat hissa ho</div>
-            </div>
-        </div>
-
-        <div class="card" onclick="this.classList.toggle('flipped')">
-            <div class="card-inner">
-                <div class="front">🌈 When I Think of You</div>
-                <div class="back">🌸 Ek ajeeb si khushi hoti hai</div>
-            </div>
-        </div>
-
-        <div class="card" onclick="this.classList.toggle('flipped')">
-            <div class="card-inner">
-                <div class="front">💐 My Promise</div>
-                <div class="back">💖 Main hamesha saath rahunga</div>
-            </div>
-        </div>
-
+        <!-- Question -->
         <div class="love-box">
             <h2>Do you love me? 💖</h2>
-            <button class="btn yes" onclick="alert('I knew it 😍❤️')">Yes</button>
-            <button class="btn no" id="noBtn">No</button>
+            <div class="btn-container">
+                <button class="btn yes" onclick="yesClicked()">Yes</button>
+                <button class="btn no" id="noBtn">No</button>
+            </div>
         </div>
 
     </div>
 
     <script>
+    function yesClicked(){
+        alert("💍 Now you are booked for lifetime ❤️\\nCongratulations 🎉");
+    }
+
     const noBtn = document.getElementById("noBtn");
 
     function moveNo(){
-        const box = document.querySelector('.love-box');
-        const maxX = box.clientWidth - 120;
-        const maxY = 80;
-
-        const x = Math.random() * maxX;
-        const y = Math.random() * maxY;
-
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
+        const x = Math.random() * 120 - 60;
+        const y = Math.random() * 80 - 40;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
     noBtn.addEventListener("touchstart", moveNo);
@@ -228,4 +226,4 @@ else:
     </script>
     """
 
-    components.html(html_code, height=1400)
+    components.html(html_code, height=1300)
