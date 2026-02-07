@@ -42,7 +42,7 @@ if not st.session_state.logged_in:
             st.error("Wrong password 💔")
 
 # -----------------------------
-# MAIN PAGE (AFTER LOGIN)
+# MAIN PAGE
 else:
     html_code = """
     <style>
@@ -59,8 +59,8 @@ else:
     h1 {
       margin-top:40px;
       color:#fff;
-      text-shadow:0 3px 8px rgba(0,0,0,0.2);
       text-align:center;
+      text-shadow:0 3px 8px rgba(0,0,0,0.2);
     }
 
     .tab-container {
@@ -70,7 +70,7 @@ else:
       justify-content:center;
       margin-top:40px;
       width:100%;
-      padding-bottom:100px;
+      padding-bottom:120px;
     }
 
     .tab {
@@ -123,91 +123,107 @@ else:
       line-height:1.5em;
     }
 
-    .bottom-bar {
-      position:fixed;
-      bottom:0;
-      left:0;
-      width:100%;
-      display:flex;
-      justify-content:space-around;
-      padding:10px 0;
+    /* Love Question */
+    .love-box {
+      margin-top:40px;
       background:rgba(255,255,255,0.3);
-      backdrop-filter:blur(10px);
-      box-shadow:0 -2px 10px rgba(0,0,0,0.2);
+      padding:30px;
+      border-radius:25px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,0.2);
+      position:relative;
+      width:90%;
+      max-width:350px;
     }
 
-    .bottom-bar button {
-      padding:8px 14px;
-      border-radius:12px;
-      border:none;
-      background:white;
-      font-weight:600;
-      cursor:pointer;
+    .love-box h2 {
+      color:white;
+      margin-bottom:20px;
     }
+
+    .btn {
+      padding:10px 20px;
+      border:none;
+      border-radius:15px;
+      font-size:1em;
+      cursor:pointer;
+      margin:10px;
+    }
+
+    .yes {
+      background:#ff4b5c;
+      color:white;
+    }
+
+    .no {
+      background:#fff;
+      position:absolute;
+    }
+
     </style>
 
     <h1>Things I Feel When I Think of You 🌷</h1>
 
     <div class="tab-container">
 
-      <div class="tab" id="tab1" onclick="this.classList.toggle('flipped')">
+      <div class="tab" onclick="this.classList.toggle('flipped')">
         <div class="tab-inner">
           <div class="front">💬 What is Love?</div>
           <div class="back">
-            🌸 Pyaar sirf paas rehna nahi hota<br>
             💞 Door hoke bhi dil saath rehta hai<br>
             ❤️ Wahi pyaar hai
           </div>
         </div>
       </div>
 
-      <div class="tab" id="tab2" onclick="this.classList.toggle('flipped')">
+      <div class="tab" onclick="this.classList.toggle('flipped')">
         <div class="tab-inner">
           <div class="front">🌙 What You Mean to Me</div>
           <div class="back">
-            💖 Tum meri zindagi ka sabse khoobsurat hissa ho<br>
-            🌷 Har pal tum yaad aate ho
+            💖 Tum meri zindagi ka sabse khoobsurat hissa ho
           </div>
         </div>
       </div>
 
-      <div class="tab" id="tab3" onclick="this.classList.toggle('flipped')">
+      <div class="tab" onclick="this.classList.toggle('flipped')">
         <div class="tab-inner">
           <div class="front">🌈 When I Think of You</div>
           <div class="back">
-            🌸 Ek ajeeb si khushi hoti hai<br>
-            💞 Bas milne ka mann karta hai
+            🌸 Ek ajeeb si khushi hoti hai
           </div>
         </div>
       </div>
 
-      <div class="tab" id="tab4" onclick="this.classList.toggle('flipped')">
+      <div class="tab" onclick="this.classList.toggle('flipped')">
         <div class="tab-inner">
           <div class="front">💐 My Promise</div>
           <div class="back">
-            💖 Main hamesha saath rahunga<br>
-            🌹 Khushi ho ya udaasi
+            💖 Main hamesha saath rahunga
           </div>
         </div>
       </div>
 
-    </div>
+      <!-- Love Question -->
+      <div class="love-box">
+        <h2>Do you love me? 💖</h2>
+        <button class="btn yes" onclick="alert('I knew it 😍❤️')">Yes</button>
+        <button class="btn no" id="noBtn">No</button>
+      </div>
 
-    <div class="bottom-bar">
-      <button onclick="scrollToTab('tab1')">💬 Love</button>
-      <button onclick="scrollToTab('tab2')">🌙 Meaning</button>
-      <button onclick="scrollToTab('tab3')">🌈 Thinking</button>
-      <button onclick="scrollToTab('tab4')">💐 Promise</button>
     </div>
 
     <script>
-    function scrollToTab(id){
-        const tab = document.getElementById(id);
-        tab.scrollIntoView({behavior:'smooth', block:'center'});
-        tab.classList.add('flipped');
-        setTimeout(()=>{tab.classList.remove('flipped');}, 4000);
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseover", moveButton);
+    noBtn.addEventListener("touchstart", moveButton);
+
+    function moveButton(){
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 150 - 75;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
     </script>
     """
 
-    components.html(html_code, height=1000)
+    components.html(html_code, height=1200)
