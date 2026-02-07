@@ -191,11 +191,7 @@ else:
 
                     
                     <br><br>
-                    <div class="card" onclick="this.classList.toggle('flipped')">
-                      <div class="card-inner">
-                        <div class="front">
-                          💌 Tap to Read
-                        </div>
+                    
 
                     🌙 So just a small reminder…<br><br>
 
@@ -204,7 +200,7 @@ else:
 
                     🌷 Now let’s do the easiest thing…<br>
                     ❤️ Never lose each other.
-                    </div></div></div>
+                    
                 </div>
             </div>
         </div>
