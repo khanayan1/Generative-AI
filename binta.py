@@ -130,7 +130,7 @@ else:
 
     /* Love Question */
     .love-box {
-        margin-top:30px;
+        margin-top:50px;
         margin:30px auto;
         width:90%;
         background:rgba(255,255,255,0.35);
