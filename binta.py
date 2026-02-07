@@ -35,7 +35,7 @@ if not st.session_state.logged_in:
     st.markdown("""
         <div class="login-box">
             <h1>💌 Welcome My Love...</h1>
-            <p>Hint :- Something I never get tired of saying</p>
+            <p>Hint 🧩 Something I never get tired of saying</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -64,24 +64,47 @@ else:
         align-items:center;
     }
 
+    /* Scrolling Love Text */
+    .marquee {
+        width:100%;
+        overflow:hidden;
+        white-space:nowrap;
+        box-sizing:border-box;
+        margin-top:20px;
+    }
+
+    .marquee span {
+        display:inline-block;
+        padding-left:100%;
+        font-size:1.3rem;
+        color:white;
+        animation: scroll 12s linear infinite;
+        font-weight:600;
+    }
+
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+
     h1 {
         color:white;
         text-align:center;
-        margin:30px 10px;
+        margin:20px 10px;
         font-size:1.4rem;
     }
 
     .container {
         width:100%;
         max-width:420px;
-        padding-bottom:140px;
+        padding-bottom:200px;
     }
 
     /* Single Card */
     .card {
         width:90%;
         height:260px;
-        margin:20px auto;
+        margin:30px auto;
         perspective:1000px;
     }
 
@@ -130,8 +153,7 @@ else:
 
     /* Love Question */
     .love-box {
-        margin-top:50px;
-        margin:30px auto;
+        margin-top:80px; /* moved lower */
         width:90%;
         background:rgba(255,255,255,0.35);
         padding:25px;
@@ -142,19 +164,19 @@ else:
 
     .love-box h2 {
         color:white;
-        margin-bottom:25px;
+        margin-bottom:30px;
         font-size:1.2rem;
     }
 
     .btn-container {
         display:flex;
         justify-content:center;
-        gap:40px;
+        gap:50px;
         position:relative;
     }
 
     .btn {
-        padding:12px 24px;
+        padding:12px 26px;
         font-size:1rem;
         border:none;
         border-radius:20px;
@@ -173,7 +195,12 @@ else:
     }
     </style>
 
-    <h1>I love You Binta(Queen) 💖</h1>
+    <!-- Scrolling Love -->
+    <div class="marquee">
+        <span>❤️ I love you ❤️ I love you ❤️ I love you ❤️ I love you ❤️</span>
+    </div>
+
+    <h1>I love You Binta (Queen) 💖</h1>
 
     <div class="container">
 
@@ -185,13 +212,9 @@ else:
                 </div>
                 <div class="back">
                     ✨ Teri aankhein batati hain, tujhe mujh se mohabbat hai<br>
-                    💞 Par dil ki tashali ke liye, izhaar ho jaaye<br>
-                    <br>
-                    Abhi tohh bol doo....
+                    💞 Par dil ki tasalli ke liye, izhaar ho jaaye<br><br>
 
-                    
-                    <br><br>
-                    
+                    Abhi toh bol do… 💖<br><br>
 
                     🌙 So just a small reminder…<br><br>
 
@@ -200,7 +223,6 @@ else:
 
                     🌷 Now let’s do the easiest thing…<br>
                     ❤️ Never lose each other.
-                    
                 </div>
             </div>
         </div>
@@ -224,8 +246,8 @@ else:
     const noBtn = document.getElementById("noBtn");
 
     function moveNo(){
-        const x = Math.random() * 120 - 60;
-        const y = Math.random() * 80 - 40;
+        const x = Math.random() * 300 - 150;
+        const y = Math.random() * 200 - 100;
         noBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
@@ -234,4 +256,4 @@ else:
     </script>
     """
 
-    components.html(html_code, height=1300)
+    components.html(html_code, height=1500)
