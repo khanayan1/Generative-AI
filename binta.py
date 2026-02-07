@@ -238,7 +238,7 @@ else:
     </style>
 
     <div class="marquee">
-        <span>❤️ I LOVE YOU ❤️ I LOVE YOU ❤️ I LOVE YOU ❤️</span>
+        <span>❤️ HAPPY PROPOSE DAY ❤️</span>
     </div>
 
     <h1>I love You Binta (Queen) 💖</h1>
@@ -249,9 +249,9 @@ else:
             <div class="card-inner">
                 <div class="front">💌 Tap to Read</div>
                 <div class="back">
-                    ✨ Teri aankhein batati hain, tujhe mujh se mohabbat hai<br>
-                    💞 Par dil ki tasalli ke liye, izhaar ho jaaye<br><br>
-                    Abhi tohh bol doo…<br><br>
+                    ✨ I want to spend my Today,<br>
+                    tomorrow, my entire life with you...<br>
+                    I wanna grow old with you my love ❤️❤️<br><br>
                     🌙 We’ve already done the hardest part —<br>
                     finding each other among millions<br><br>
                     ❤️ Never lose each other.
