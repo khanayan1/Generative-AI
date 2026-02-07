@@ -26,7 +26,7 @@ if not st.session_state.logged_in:
             flex-direction:column;
             justify-content:center;
             align-items:center;
-            height:70vh;
+            height:50vh;
             text-align:center;
         }
         </style>
