@@ -131,25 +131,25 @@ elif st.session_state.page == 3:
     <div class="message">
         <h2>Dear Binta ❤️</h2>
 
-        <p>
+        
         I’ve been thinking about everything… and honestly, it hurts knowing that I hurt you.
         That was never my intention.
-        </p>
+        
 
-        <p>
+       
         You mean more to me than I’m able to express sometimes, and maybe that’s where I go wrong…
         but my feelings for you are real, always have been.
-        </p>
+        
 
-        <p>
+        
         I miss your smile, your presence, your energy…
         and I really don’t want to lose your smile love...
-        </p>
+        
 
-        <p>
+        
         I’m truly sorry… not just in words, but from my heart.  
         Please forgive me ❤️
-        </p>
+       
     </div>
     """, unsafe_allow_html=True)
 
