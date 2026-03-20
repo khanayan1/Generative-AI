@@ -1,36 +1,75 @@
 import streamlit as st
+import time
 
 # Page config
-st.set_page_config(page_title="I'm Sorry ❤️", page_icon="💔")
+st.set_page_config(page_title="Sorry ❤️", page_icon="💔")
 
-# Title
-st.title("I'm Really Sorry ❤️")
+# Initialize session state
+if "page" not in st.session_state:
+    st.session_state.page = 1
 
-# Subtitle
-st.subheader("I know I messed up... 😔")
+# -------- PAGE 1 --------
+if st.session_state.page == 1:
+    st.markdown(
+        """
+        <h1 style='text-align: center; color: red; font-size: 80px;'>
+        SORRY 💔
+        </h1>
+        <h3 style='text-align: center;'>I really didn't mean to hurt you...</h3>
+        """,
+        unsafe_allow_html=True
+    )
 
-# Input your GF's name
-name = st.text_input("Enter her name:", "")
+    st.write("\n")
+    
+    if st.button("Click if you still care ❤️"):
+        with st.spinner("Opening my heart..."):
+            time.sleep(2)
+        st.session_state.page = 2
+        st.rerun()
 
-# Message input
-message = st.text_area("Write your apology message:", 
-                       "I’m really sorry for what I did. You mean a lot to me and I never want to hurt you. Please forgive me ❤️")
 
-# Button to show message
-if st.button("Send Apology 💌"):
-    if name:
-        st.markdown(f"""
-        ### Dear {name} ❤️
+# -------- PAGE 2 --------
+elif st.session_state.page == 2:
+    st.markdown(
+        """
+        <h2 style='text-align: center;'>Hey Love ❤️</h2>
+        """,
+        unsafe_allow_html=True
+    )
 
-        {message}
+    name = st.text_input("Her Name 💖")
 
-        ---
-        I promise to be better and make you smile again 😊  
-        Please forgive me 💖
-        """)
-    else:
-        st.warning("Please enter her name 😅")
+    message = st.text_area(
+        "My Apology 💌",
+        "I know I hurt you, and I hate that I did. You mean everything to me. "
+        "Please give me one chance to make things right. I promise I'll do better ❤️"
+    )
 
-# Cute extra section
-st.write("---")
-st.caption("Made with love by someone who really cares 💞")
+    if st.button("Show My Heart 💖"):
+        st.session_state.page = 3
+        st.session_state.name = name
+        st.session_state.message = message
+        st.rerun()
+
+
+# -------- PAGE 3 --------
+elif st.session_state.page == 3:
+    st.balloons()
+
+    st.markdown(
+        f"""
+        <div style='text-align: center;'>
+            <h2>Dear {st.session_state.get("name", "Love")} ❤️</h2>
+            <p style='font-size:20px;'>{st.session_state.get("message")}</p>
+            <br>
+            <h3>I’m really sorry... please forgive me 💔</h3>
+            <h1>❤️ ❤️ ❤️</h1>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    if st.button("Start Again 🔄"):
+        st.session_state.page = 1
+        st.rerun()
